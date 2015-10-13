@@ -8,19 +8,39 @@ namespace AopDemo.Tests
 	public class AccessAudit
 	{
 		[Test]
-		public void ReadingNameUpdatesTimestamp()
+		public void ReadingFirstNameUpdatesTimestamp()
 		{
+			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+			var before = DateTime.Now;
+			var name = person.FirstName;
+			var after = DateTime.Now;
 
-			Smock.Run (ctx => {
-				var now = DateTime.Now.AddMonths (18);
-				var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+			Assert.Greater(person.AccessedOn, before);
+			Assert.Less(person.AccessedOn, after);
+		}
 
-				ctx.Setup (() => DateTime.Now).Returns (now);
+		[Test]
+		public void ReadingLastNameUpdatesTimestamp()
+		{
+			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+			var before = DateTime.Now;
+			var name = person.LastName;
+			var after = DateTime.Now;
 
-				var name = person.FirstName;
+			Assert.Greater(person.AccessedOn, before);
+			Assert.Less(person.AccessedOn, after);
+		}
 
-				Assert.AreEqual (now, person.AccessedOn);
-			});
+		[Test]
+		public void ReadingAgeUpdatesTimestamp()
+		{
+			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+			var before = DateTime.Now;
+			var name = person.Age;
+			var after = DateTime.Now;
+
+			Assert.Greater(person.AccessedOn, before);
+			Assert.Less(person.AccessedOn, after);
 		}
 	}
 }
