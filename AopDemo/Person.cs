@@ -6,9 +6,9 @@ namespace AopDemo
 	public class Person : IAudit
 	{
 		#region IAudit implementation
-		public DateTime CreatedOn { get; set; }
-		public DateTime AccessedOn { get; set; }
-		public DateTime ModifiedOn { get; set; }
+		public DateTime CreatedOn { get; set; } = DateTime.Now;
+		public DateTime AccessedOn { get; set; } = DateTime.Now;
+		public DateTime ModifiedOn { get; set; } = DateTime.Now;
 		#endregion
 
 		public String FirstName

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Smocks;
 using System;
 
 namespace AopDemo.Tests
@@ -9,37 +10,46 @@ namespace AopDemo.Tests
 		[Test]
 		public void ModifyingFirstNameUpdatesTimestamp()
 		{
-			var person = new Person();
-			var before = DateTime.Now;
-			person.FirstName = "John";
-			var after = DateTime.Now;
+			Smock.Run(ctx => {
+				var person = new Person();
 
-			Assert.Greater(person.ModifiedOn, before);
-			Assert.Less(person.ModifiedOn, after);
+				var now = DateTime.Now;
+				ctx.Setup(() => DateTime.Now).Returns(now);
+
+				person.FirstName = "John";
+
+				Assert.AreEqual(now, person.ModifiedOn);
+			});
 		}
 
 		[Test]
 		public void ModifyingLastNameUpdatesTimestamp()
 		{
-			var person = new Person();
-			var before = DateTime.Now;
-			person.LastName = "Doe";
-			var after = DateTime.Now;
+			Smock.Run(ctx => {
+				var person = new Person();
 
-			Assert.Greater(person.ModifiedOn, before);
-			Assert.Less(person.ModifiedOn, after);
+				var now = DateTime.Now;
+				ctx.Setup(() => DateTime.Now).Returns(now);
+
+				person.LastName = "Doe";
+
+				Assert.AreEqual(now, person.ModifiedOn);
+			});
 		}
 
 		[Test]
 		public void ModifyingAgeUpdatesTimestamp()
 		{
-			var person = new Person();
-			var before = DateTime.Now;
-			person.Age = 42;
-			var after = DateTime.Now;
+			Smock.Run(ctx => {
+				var person = new Person();
 
-			Assert.Greater(person.ModifiedOn, before);
-			Assert.Less(person.ModifiedOn, after);
+				var now = DateTime.Now;
+				ctx.Setup(() => DateTime.Now).Returns(now);
+
+				person.Age = 42;
+
+				Assert.AreEqual(now, person.ModifiedOn);
+			});
 		}
 	}
 }

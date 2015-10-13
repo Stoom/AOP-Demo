@@ -10,37 +10,46 @@ namespace AopDemo.Tests
 		[Test]
 		public void ReadingFirstNameUpdatesTimestamp()
 		{
-			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
-			var before = DateTime.Now;
-			var name = person.FirstName;
-			var after = DateTime.Now;
+			Smock.Run(ctx => {
+				var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
 
-			Assert.Greater(person.AccessedOn, before);
-			Assert.Less(person.AccessedOn, after);
+				var now = DateTime.Now.AddMonths(18);
+				ctx.Setup(() => DateTime.Now).Returns(now);
+
+				var name = person.FirstName;
+
+				Assert.AreEqual(now, person.AccessedOn);
+			});
 		}
 
 		[Test]
 		public void ReadingLastNameUpdatesTimestamp()
 		{
-			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
-			var before = DateTime.Now;
-			var name = person.LastName;
-			var after = DateTime.Now;
+			Smock.Run(ctx => {
+				var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
 
-			Assert.Greater(person.AccessedOn, before);
-			Assert.Less(person.AccessedOn, after);
+				var now = DateTime.Now.AddMonths(18);
+				ctx.Setup(() => DateTime.Now).Returns(now);
+
+				var name = person.LastName;
+
+				Assert.AreEqual(now, person.AccessedOn);
+			});
 		}
 
 		[Test]
 		public void ReadingAgeUpdatesTimestamp()
 		{
-			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
-			var before = DateTime.Now;
-			var name = person.Age;
-			var after = DateTime.Now;
+			Smock.Run(ctx => {
+				var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
 
-			Assert.Greater(person.AccessedOn, before);
-			Assert.Less(person.AccessedOn, after);
+				var now = DateTime.Now.AddMonths(18);
+				ctx.Setup(() => DateTime.Now).Returns(now);
+
+				var name = person.Age;
+
+				Assert.AreEqual(now, person.AccessedOn);
+			});
 		}
 	}
 }
