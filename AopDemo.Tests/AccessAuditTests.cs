@@ -5,7 +5,7 @@ using System;
 namespace AopDemo.Tests
 {
 	[TestFixture]
-	public class AccessAudit
+	public class AccessAuditTests
 	{
 		[Test]
 		public void ReadingFirstNameUpdatesTimestamp()

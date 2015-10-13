@@ -49,7 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessAudit.cs" />
+    <Compile Include="AccessAuditTests.cs" />
+    <Compile Include="ModifyAuditTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
