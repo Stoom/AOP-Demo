@@ -21,6 +21,7 @@ namespace AopDemo
 			set
 			{
 				_firstName = value;
+				ModifiedOn = DateTime.Now;
 			}
 		}
 		public String LastName
@@ -33,6 +34,7 @@ namespace AopDemo
 			set
 			{
 				_lastName = value;
+				ModifiedOn = DateTime.Now;
 			}
 		}
 		public int Age
@@ -45,6 +47,7 @@ namespace AopDemo
 			set
 			{
 				_age = value;
+				ModifiedOn = DateTime.Now;
 			}
 		}
 
