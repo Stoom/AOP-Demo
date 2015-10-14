@@ -11,7 +11,7 @@ namespace AopDemo.Tests
 
 		public void Init()
 		{
-			_person = PersonFactory.GetInstance().CreatePerson();
+			_person = PersonFactory.CreatePerson();
 		}
 
 		[Test]
@@ -32,6 +32,7 @@ namespace AopDemo.Tests
 		[Test]
 		public void ModifyingLastNameUpdatesTimestamp()
 		{
+
 			Smock.Run(ctx => {
 				Init();
 

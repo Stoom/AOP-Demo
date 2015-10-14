@@ -1,5 +1,6 @@
 ﻿using System;
 using AopDemo.Interfaces;
+using AopDemo.Aop.Attributes;
 
 namespace AopDemo
 {
@@ -11,9 +12,12 @@ namespace AopDemo
 		public DateTime ModifiedOn { get; set; } = DateTime.Now;
 		#endregion
 
-		public String FirstName { get; set; }
-		public String LastName { get; set; }
-		public int Age { get; set; }
+		[Audit]
+		public virtual String FirstName { get; set; }
+		[Audit]
+		public virtual String LastName { get; set; }
+		[Audit]
+		public virtual int Age { get; set; }
 
 		public Person()
 		{

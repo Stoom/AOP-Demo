@@ -11,7 +11,7 @@ namespace AopDemo.Tests
 
 		public void Init()
 		{
-			_person = PersonFactory.GetInstance().CreatePerson("John", "Doe", 24);
+			_person = PersonFactory.CreatePerson("John", "Doe", 24);
 		}
 
 		[Test]
