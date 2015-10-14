@@ -11,49 +11,20 @@ namespace AopDemo
 		public DateTime ModifiedOn { get; set; } = DateTime.Now;
 		#endregion
 
-		public String FirstName
-		{ 
-			get
-			{
-				AccessedOn = DateTime.Now;
-				return _firstName;
-			}
-			set
-			{
-				_firstName = value;
-				ModifiedOn = DateTime.Now;
-			}
-		}
-		public String LastName
-		{ 
-			get
-			{
-				AccessedOn = DateTime.Now;
-				return _lastName;
-			}
-			set
-			{
-				_lastName = value;
-				ModifiedOn = DateTime.Now;
-			}
-		}
-		public int Age
-		{ 
-			get
-			{
-				AccessedOn = DateTime.Now;
-				return _age;
-			}
-			set
-			{
-				_age = value;
-				ModifiedOn = DateTime.Now;
-			}
+		public String FirstName { get; set; }
+		public String LastName { get; set; }
+		public int Age { get; set; }
+
+		public Person()
+		{
 		}
 
-		private String _firstName;
-		private String _lastName;
-		private int _age;
+		public Person(String firstName, String lastName, int age)
+		{
+			FirstName = firstName;
+			LastName = lastName;
+			Age = age;
+		}
 	}
 }
 

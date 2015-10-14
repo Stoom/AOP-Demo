@@ -29,14 +29,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Interfaces\IAudit.cs" />
+    <Compile Include="Aop\Attributes\AuditAttribute.cs" />
+    <Compile Include="Aop\Aspects\AuditProperty.cs" />
+    <Compile Include="Aop\MethodInfoExtensions.cs" />
+    <Compile Include="Aop\CrossCuts\PropertyAttributeSelect.cs" />
+    <Compile Include="PersonFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Interfaces\" />
+    <Folder Include="Aop\" />
+    <Folder Include="Aop\Attributes\" />
+    <Folder Include="Aop\Aspects\" />
+    <Folder Include="Aop\CrossCuts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

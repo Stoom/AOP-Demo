@@ -7,18 +7,25 @@ namespace AopDemo.Tests
 	[TestFixture]
 	public class AccessAuditTests
 	{
+		private Person _person;
+
+		public void Init()
+		{
+			_person = PersonFactory.GetInstance().CreatePerson("John", "Doe", 24);
+		}
+
 		[Test]
 		public void ReadingFirstNameUpdatesTimestamp()
 		{
 			Smock.Run(ctx => {
-				var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+				Init();
 
 				var now = DateTime.Now.AddMonths(18);
 				ctx.Setup(() => DateTime.Now).Returns(now);
 
-				var name = person.FirstName;
+				var name = _person.FirstName;
 
-				Assert.AreEqual(now, person.AccessedOn);
+				Assert.AreEqual(now, _person.AccessedOn);
 			});
 		}
 
@@ -26,14 +33,14 @@ namespace AopDemo.Tests
 		public void ReadingLastNameUpdatesTimestamp()
 		{
 			Smock.Run(ctx => {
-				var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+				Init();
 
 				var now = DateTime.Now.AddMonths(18);
 				ctx.Setup(() => DateTime.Now).Returns(now);
 
-				var name = person.LastName;
+				var name = _person.LastName;
 
-				Assert.AreEqual(now, person.AccessedOn);
+				Assert.AreEqual(now, _person.AccessedOn);
 			});
 		}
 
@@ -41,14 +48,14 @@ namespace AopDemo.Tests
 		public void ReadingAgeUpdatesTimestamp()
 		{
 			Smock.Run(ctx => {
-				var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+				Init();
 
 				var now = DateTime.Now.AddMonths(18);
 				ctx.Setup(() => DateTime.Now).Returns(now);
 
-				var name = person.Age;
+				var name = _person.Age;
 
-				Assert.AreEqual(now, person.AccessedOn);
+				Assert.AreEqual(now, _person.AccessedOn);
 			});
 		}
 	}

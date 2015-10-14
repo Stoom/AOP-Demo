@@ -7,18 +7,25 @@ namespace AopDemo.Tests
 	[TestFixture]
 	public class ModifyAuditTests
 	{
+		private Person _person;
+
+		public void Init()
+		{
+			_person = PersonFactory.GetInstance().CreatePerson();
+		}
+
 		[Test]
 		public void ModifyingFirstNameUpdatesTimestamp()
 		{
 			Smock.Run(ctx => {
-				var person = new Person();
+				Init();
 
 				var now = DateTime.Now;
 				ctx.Setup(() => DateTime.Now).Returns(now);
 
-				person.FirstName = "John";
+				_person.FirstName = "John";
 
-				Assert.AreEqual(now, person.ModifiedOn);
+				Assert.AreEqual(now, _person.ModifiedOn);
 			});
 		}
 
@@ -26,14 +33,14 @@ namespace AopDemo.Tests
 		public void ModifyingLastNameUpdatesTimestamp()
 		{
 			Smock.Run(ctx => {
-				var person = new Person();
+				Init();
 
 				var now = DateTime.Now;
 				ctx.Setup(() => DateTime.Now).Returns(now);
 
-				person.LastName = "Doe";
+				_person.LastName = "Doe";
 
-				Assert.AreEqual(now, person.ModifiedOn);
+				Assert.AreEqual(now, _person.ModifiedOn);
 			});
 		}
 
@@ -41,14 +48,14 @@ namespace AopDemo.Tests
 		public void ModifyingAgeUpdatesTimestamp()
 		{
 			Smock.Run(ctx => {
-				var person = new Person();
+				Init();
 
 				var now = DateTime.Now;
 				ctx.Setup(() => DateTime.Now).Returns(now);
 
-				person.Age = 42;
+				_person.Age = 42;
 
-				Assert.AreEqual(now, person.ModifiedOn);
+				Assert.AreEqual(now, _person.ModifiedOn);
 			});
 		}
 	}
