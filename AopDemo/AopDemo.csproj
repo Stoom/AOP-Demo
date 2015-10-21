@@ -29,14 +29,40 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="LinFu.Core">
+      <HintPath>..\packages\LinFu.Core.Stoom.3.0\lib\LinFu.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Interfaces\IAudit.cs" />
+    <Compile Include="Aop\Attributes\AuditAttribute.cs" />
+    <Compile Include="Aop\CrossCuts\PropertyAttributeSelect.cs" />
+    <Compile Include="PersonFactory.cs" />
+    <Compile Include="Aop\SimpleAroundInvokeProvider.cs" />
+    <Compile Include="Aop\Aspects\AuditProperty.cs">
+      <Link>Aop\Aspects\AuditProperty.cs</Link>
+    </Compile>
+    <Compile Include="Aop\MethodBaseExtensions.cs" />
+    <Compile Include="Aop\AssemblyExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Interfaces\" />
+    <Folder Include="Aop\" />
+    <Folder Include="Aop\Aspects\" />
+    <Folder Include="Aop\CrossCuts\" />
+    <Folder Include="Aop\Attributes\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PostWeaveTaskLocation>$(MSBuildProjectDirectory)\..\packages\LinFu.Core.Stoom.3.0\lib\LinFu.Core.dll</PostWeaveTaskLocation>
+  </PropertyGroup>
+  <UsingTask TaskName="PostWeaveTask" AssemblyFile="$(PostWeaveTaskLocation)" />
+  <Target Name="AfterBuild">
+    <PostWeaveTask TargetFile="$(MSBuildProjectDirectory)\$(OutputPath)$(MSBuildProjectName).dll" InterceptAllExceptions="false" InterceptAllFields="false" InterceptAllNewInstances="false" InterceptAllMethodCalls="false" InterceptAllMethodBodies="true" />
+  </Target>
 </Project>

@@ -7,40 +7,47 @@ namespace AopDemo.Tests
 	[TestFixture]
 	public class AccessAuditTests
 	{
+        private Person _person;
+
+        public void Init()
+        {
+            _person = PersonFactory.Instance.Create("John", "Doe", 42);
+        }
+
 		[Test]
 		public void ReadingFirstNameUpdatesTimestamp()
-		{
-			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+        {
+            Init();
 			var before = DateTime.Now;
-			var name = person.FirstName;
+			var name = _person.FirstName;
 			var after = DateTime.Now;
 
-			Assert.Greater(person.AccessedOn, before);
-			Assert.Less(person.AccessedOn, after);
+			Assert.Greater(_person.AccessedOn, before);
+			Assert.Less(_person.AccessedOn, after);
 		}
 
 		[Test]
 		public void ReadingLastNameUpdatesTimestamp()
-		{
-			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+        {
+            Init();
 			var before = DateTime.Now;
-			var name = person.LastName;
+			var name = _person.LastName;
 			var after = DateTime.Now;
 
-			Assert.Greater(person.AccessedOn, before);
-			Assert.Less(person.AccessedOn, after);
+			Assert.Greater(_person.AccessedOn, before);
+			Assert.Less(_person.AccessedOn, after);
 		}
 
 		[Test]
 		public void ReadingAgeUpdatesTimestamp()
 		{
-			var person = new Person { FirstName = "John", LastName = "Doe", Age = 24 };
+            Init();
 			var before = DateTime.Now;
-			var name = person.Age;
+			var name = _person.Age;
 			var after = DateTime.Now;
 
-			Assert.Greater(person.AccessedOn, before);
-			Assert.Less(person.AccessedOn, after);
+			Assert.Greater(_person.AccessedOn, before);
+			Assert.Less(_person.AccessedOn, after);
 		}
 	}
 }

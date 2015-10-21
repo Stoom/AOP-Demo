@@ -6,40 +6,47 @@ namespace AopDemo.Tests
 	[TestFixture]
 	public class ModifyAuditTests
 	{
+        private Person _person;
+
+        public void Init()
+        {
+            _person = PersonFactory.Instance.Create();
+        }
+
 		[Test]
 		public void ModifyingFirstNameUpdatesTimestamp()
 		{
-			var person = new Person();
-			var before = DateTime.Now;
-			person.FirstName = "John";
+            Init();
+            var before = DateTime.Now;
+            _person.FirstName = "John";
 			var after = DateTime.Now;
 
-			Assert.Greater(person.ModifiedOn, before);
-			Assert.Less(person.ModifiedOn, after);
+            Assert.Greater(_person.ModifiedOn, before);
+            Assert.Less(_person.ModifiedOn, after);
 		}
 
 		[Test]
 		public void ModifyingLastNameUpdatesTimestamp()
-		{
-			var person = new Person();
+        {
+            Init();
 			var before = DateTime.Now;
-			person.LastName = "Doe";
+            _person.LastName = "Doe";
 			var after = DateTime.Now;
 
-			Assert.Greater(person.ModifiedOn, before);
-			Assert.Less(person.ModifiedOn, after);
+            Assert.Greater(_person.ModifiedOn, before);
+            Assert.Less(_person.ModifiedOn, after);
 		}
 
 		[Test]
 		public void ModifyingAgeUpdatesTimestamp()
-		{
-			var person = new Person();
+        {
+            Init();
 			var before = DateTime.Now;
-			person.Age = 42;
+            _person.Age = 42;
 			var after = DateTime.Now;
 
-			Assert.Greater(person.ModifiedOn, before);
-			Assert.Less(person.ModifiedOn, after);
+            Assert.Greater(_person.ModifiedOn, before);
+            Assert.Less(_person.ModifiedOn, after);
 		}
 	}
 }
