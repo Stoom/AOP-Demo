@@ -17,37 +17,46 @@ namespace AopDemo.Tests
 		[Test]
 		public void ReadingFirstNameUpdatesTimestamp()
         {
-            Init();
-			var before = DateTime.Now;
-			var name = _person.FirstName;
-			var after = DateTime.Now;
+            Smock.Run(ctx => { 
+                Init();
 
-			Assert.Greater(_person.AccessedOn, before);
-			Assert.Less(_person.AccessedOn, after);
+                var now = DateTime.Now.AddMonths(18);
+                ctx.Setup(() => DateTime.Now).Returns(now);
+
+                var name = _person.FirstName;
+
+                Assert.AreEqual(now, _person.AccessedOn);
+            });
 		}
 
 		[Test]
 		public void ReadingLastNameUpdatesTimestamp()
         {
-            Init();
-			var before = DateTime.Now;
-			var name = _person.LastName;
-			var after = DateTime.Now;
+            Smock.Run(ctx => { 
+                Init();
 
-			Assert.Greater(_person.AccessedOn, before);
-			Assert.Less(_person.AccessedOn, after);
+                var now = DateTime.Now.AddMonths(18);
+                ctx.Setup(() => DateTime.Now).Returns(now);
+
+                var name = _person.LastName;
+
+                Assert.AreEqual(now, _person.AccessedOn);
+            });
 		}
 
 		[Test]
 		public void ReadingAgeUpdatesTimestamp()
 		{
-            Init();
-			var before = DateTime.Now;
-			var name = _person.Age;
-			var after = DateTime.Now;
+            Smock.Run(ctx => { 
+                Init();
 
-			Assert.Greater(_person.AccessedOn, before);
-			Assert.Less(_person.AccessedOn, after);
+                var now = DateTime.Now.AddMonths(18);
+                ctx.Setup(() => DateTime.Now).Returns(now);
+
+                var name = _person.Age;
+
+                Assert.AreEqual(now, _person.AccessedOn);
+            });
 		}
 	}
 }
