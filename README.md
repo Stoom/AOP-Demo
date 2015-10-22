@@ -20,7 +20,6 @@ Depending on your situation most dynamic proxy and runtime IL weaving AOP framew
 
 ## Uses for AOP
 It should be stated that AOP is not the silver bullet that will put holes in OOD.  It is another tool in the toolbox increase both the SRP and DRY principles.  Some other uses for AOP include:
-
 1. Logging
 2. Auditing
 3. Validation
